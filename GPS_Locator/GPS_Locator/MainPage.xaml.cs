@@ -13,7 +13,14 @@ namespace GPS_Locator
         public MainPage()
         {
             InitializeComponent();
-    
+            GPSClass GPS = new GPSClass();
+            AddressDataModel address = new AddressDataModel();
+            address = GPS.DeserializeAdressObject();
+            lblCity.Text = address.city;
+            lblContinent.Text = address.continent;
+            lblCountry.Text = address.countryName;
+            lblLocality.Text = address.locality;
+            lblPostCode.Text = address.postcode;
         }
     }
 }
