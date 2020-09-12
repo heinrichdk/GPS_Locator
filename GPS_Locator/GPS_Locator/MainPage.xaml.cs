@@ -10,17 +10,22 @@ namespace GPS_Locator
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public  MainPage()
+        {
+            Run();
+        }
+        public async void Run()
         {
             InitializeComponent();
             GPSClass GPS = new GPSClass();
-            AddressDataModel address = new AddressDataModel();
-            address = GPS.DeserializeAdressObject();
-            lblCity.Text = address.city;
-            lblContinent.Text = address.continent;
-            lblCountry.Text = address.countryName;
-            lblLocality.Text = address.locality;
-            lblPostCode.Text = address.postcode;
+            Root adress = new Root();
+            string fullstring = await GPS.getAddress();
+            adress = GPS.DeserializeAdressObject(fullstring);
+            lblCity.Text = adress.city;
+            lblContinent.Text = adress.continent;
+            lblCountry.Text = adress.countryName;
+            lblLocality.Text = adress.locality;
+            
         }
     }
 }

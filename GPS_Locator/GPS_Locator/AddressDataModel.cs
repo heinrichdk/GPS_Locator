@@ -4,12 +4,51 @@ using System.Text;
 
 namespace GPS_Locator
 {
-    public class AddressDataModel
+
+    public class Administrative
     {
-        public string continent { get => continent; set => continent = value; }
-        public string countryName { get => countryName; set => countryName = value; }
-        public string city { get => city; set => city = value; }
-        public string locality { get => locality; set => locality = value; }
-        public string postcode { get => postcode; set => postcode = value; }
+        public int order { get; set; }
+        public int adminLevel { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string isoName { get; set; }
+        public string isoCode { get; set; }
+        public string wikidataId { get; set; }
+        public int geonameId { get; set; }
+    }
+
+    public class Informative
+    {
+        public int order { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string isoCode { get; set; }
+        public string wikidataId { get; set; }
+        public int geonameId { get; set; }
+    }
+
+    public class LocalityInfo
+    {
+        public List<Administrative> administrative { get; set; }
+        public List<Informative> informative { get; set; }
+    }
+
+    public class Root
+    {
+        public double latitude { get; set; }
+        public double longitude { get; set; }
+        public string plusCode { get; set; }
+        public string localityLanguageRequested { get; set; }
+        public string continent { get; set; }
+        public string continentCode { get; set; }
+        public string countryName { get; set; }
+        public string countryCode { get; set; }
+        public string principalSubdivision { get; set; }
+        public string principalSubdivisionCode { get; set; }
+        public string city { get; set; }
+        public string locality { get; set; }
+        public string postcode { get; set; }
+        public LocalityInfo localityInfo { get; set; }
     }
 }
+

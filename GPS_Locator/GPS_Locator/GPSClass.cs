@@ -6,41 +6,46 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.IO;
+
 namespace GPS_Locator
 {
     public  class GPSClass
     {
         static HttpClient client = new HttpClient();
-        private async Task<string> getAddress()
+        public async Task<string> getAddress()
         {
             try
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium);
                 var location = await Geolocation.GetLocationAsync(request);
-                string address = null;
+                string json = null;
                 if (location != null)
                 {
-                    HttpResponseMessage response = await client.GetAsync(String.Format("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={0}&longitude={1}&localityLanguage=en", location.Latitude, location.Longitude));
+                    //Regional settings returned deacimals with , where api needs .
+                    string sLong = location.Longitude.ToString().Replace(',', '.');
+                    string sLat = location.Latitude.ToString().Replace(',', '.');
+                    string rstring = String.Format("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude={0}&longitude={1}&localityLanguage=en", sLat, sLong);
+                    HttpResponseMessage response = await client.GetAsync(rstring);
                     if (response.IsSuccessStatusCode)
                     {
-                        address = await response.Content.ReadAsStringAsync();
+                        json = await response.Content.ReadAsStringAsync();
                     }
                 }
-                return address;
+                return json;
             }
             catch(Exception ex)
             {
                 return null;
             }
         }
-        public  AddressDataModel DeserializeAdressObject()
+        public  Root DeserializeAdressObject(string json)
         {
 
-            AddressDataModel address = new AddressDataModel();
-            string json = getAddress().ToString();
+            Root address = new Root();
             if(json != null)
             {
-                address = JsonSerializer.Deserialize<AddressDataModel>(json);
+                address = JsonSerializer.Deserialize<Root>(json);
             }
             return address;
         }

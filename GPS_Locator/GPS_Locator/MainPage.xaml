@@ -22,13 +22,11 @@
             <Label Text="Continent" Grid.Row="0" Grid.Column="0"/>
             <Label  Grid.Row="0" Grid.Column="1" x:Name="lblContinent"/>
             <Label Text="Country" Grid.Row="1" Grid.Column="0"/>
-            <Label  Grid.Row="0" Grid.Column="1" x:Name="lblCountry"/>
+            <Label  Grid.Row="1" Grid.Column="1" x:Name="lblCountry"/>
             <Label Text="City" Grid.Row="2" Grid.Column="0"/>
-            <Label  Grid.Row="0" Grid.Column="1" x:Name="lblCity"/>
+            <Label  Grid.Row="2" Grid.Column="1" x:Name="lblCity"/>
             <Label Text="Locality" Grid.Row="3" Grid.Column="0"/>
-            <Label  Grid.Row="0" Grid.Column="1" x:Name="lblLocality"/>
-            <Label Text="PostCode" Grid.Row="4" Grid.Column="0"/>
-            <Label  Grid.Row="0" Grid.Column="1" x:Name="lblPostCode"/>
+            <Label  Grid.Row="3" Grid.Column="1" x:Name="lblLocality"/>
         </Grid>
     </StackLayout>
 
